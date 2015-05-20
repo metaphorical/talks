@@ -1,0 +1,82 @@
+body {
+  font-family: 'Lato', sans-serif;
+  min-height: 740px;
+  background: #d4ddc7;
+  /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #d4ddc7 0%, #d0e2c5 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #d4ddc7), color-stop(100%, #d0e2c5));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(-45deg, #d4ddc7 0%, #d0e2c5 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(-45deg, #d4ddc7 0%, #d0e2c5 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(-45deg, #d4ddc7 0%, #d0e2c5 100%);
+  /* IE10+ */
+  background: linear-gradient(135deg, #d4ddc7 0%, #d0e2c5 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4ddc7', endColorstr='#d0e2c5',GradientType=1 );
+  /* IE6-9 fallback on horizontal gradient */ }
+
+ul {
+  list-style: inside; }
+
+.title-slide .main {
+  padding: 25px;
+  width: 95%;
+  border-bottom: 30px solid #4fb94a; }
+  .title-slide .main h1 {
+    font-size: 80px;
+    font-weight: bold; }
+.title-slide .footer {
+  font-size: 40px;
+  padding-top: 70px; }
+  .title-slide .footer .left {
+    width: 45%;
+    display: inline-block;
+    float: left;
+    text-align: left; }
+  .title-slide .footer .right {
+    width: 45%;
+    display: inline-block;
+    float: right;
+    text-align: right; }
+
+.single-title {
+  font-size: 1.8em;
+  font-weight: bold; }
+
+.three-grid {
+  display: block;
+  width: 100%; }
+  .three-grid .element-box {
+    width: 31%;
+    display: inline-block; }
+    .three-grid .element-box img {
+      width: 100%; }
+
+.w-sub h1 {
+  font-size: 1.8em;
+  font-weight: bold; }
+  .w-sub h1 img {
+    height: 1.8em; }
+.w-sub h4 img {
+  height: 1em; }
+
+.two-split-h .part {
+  display: block;
+  width: 100%; }
+  .two-split-h .part img {
+    width: 100%;
+    border-radius: 7px; }
+
+.two-split-v .part {
+  display: inline-block;
+  width: 48%;
+  vertical-align: top;
+  font-size: 0.5em; }
+  .two-split-v .part img {
+    width: 100%;
+    border-radius: 7px; }
+
+/*# sourceMappingURL=meta.css.map */
