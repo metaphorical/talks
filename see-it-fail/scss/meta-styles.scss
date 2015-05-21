@@ -1,5 +1,6 @@
 body {
     font-family: 'Lato', sans-serif;
+
     min-height: 740px;
 
     background: #d4ddc7; /* Old browsers */
@@ -89,6 +90,11 @@ ul {
     .part {
         display:block;
         width: 100%;
+        font-size: 0.7em;
+        h1 {
+            font-size: 1.7em;
+            font-weight: bold;
+        }
         img {
             width: 100%;
             border-radius: 7px;
@@ -100,9 +106,9 @@ ul {
     .part {
         display:inline-block;
         width: 48%;
-        vertical-align: top; 
+        vertical-align: top;
 
-        font-size: 0.5em;
+        font-size: 0.7em;
 
         img {
             width: 100%;
