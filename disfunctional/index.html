@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>disfunctional</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+	  .structureImage {
+		  display: block;
+		  width: 90%;
+		  margin 0 auto;
+	  }
+	  .structureImage img {
+		  width: 100%;
+	  }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+    </style>
+  </head>
+  <body>
+	  <!--
+		Javascript really handles tons of stuff... It is somehow boiled dow to it being the
+		most versatile language out there...
+
+		Probably because it provides so much manuvaring space, so much hacking is possible
+
+
+		FP, map filter reduce and then some
+
+		Immutable, why all the copies (and why do I still have free memory)
+
+		FRP, stream == observable FRP ==! streams REACTIVE...
+
+		stream of ... vs stream of ...
+
+	  -->
+    <textarea id="source">
+
+class: center, middle
+
+# Disfunctional
+### FP and FRP in JS stack
+
+####tw : @rastko_ | gh: metaphorical
+
+---
+class: center, middle
+
+# DOM misconception
+
+---
+
+# Stuff JS handles today
+
+### - Data parsing
+### - APIs ceation (RESTful and you name it)
+### - APIs consumption (RESTful and you name it)
+### - UI rendering
+### - UI interaction
+### - CRUD
+#### etc...
+
+---
+
+class: center, middle
+
+# data treatment
+### it's all (sets of)data after all
+
+---
+
+class: center, middle
+
+# Higher order functions
+### .map(), .filter(), .reduce()...
+
+---
+class: middle
+
+# Pipeline of mutations
+
+```jacascript
+var query = window.location.search.split('&')
+	.map((valueString) => {
+
+		valueString = valueString.replace(/^\?/g, '');
+
+		var keyValuePair = valueString.split('=')
+
+		return keyValuePair;
+
+	}).map((keyValuePair) => {
+
+			return {[keyValuePair[0]]: decodeURIComponent(keyValuePair[1])};
+
+	}).reduce((a, b) => {
+
+			return Object.assign(a, b);
+
+	}, {});
+```
+---
+### Or some evaluations
+```javascript
+/** [{
+    "objectID": 9131042,
+    "name": "360fly - Panoramic 360° HD Video Camera - Black",
+    "description": "This 360fly panoramic 360&#176; blah, blah blah",
+    "brand": "360fly",
+    "categories": [
+      "Cameras & Camcorders",
+      "Camcorders",
+      "Action Camcorders",
+      "All Action Camcorders"
+    ],
+    "type": "Point&#38;shoot camcrder",
+    "price": 399.99,
+    "image": "http://img.bbystatic.com/BestBuy_US/images/products/9131/9131042_rb.jpg",
+    "free_shipping": true
+	...
+  }, ... lot more stuff in same form] */
+
+var drones = data
+	.filter((item) => {
+
+		return item.categories.reduce((a, b) => (a + b)).includes(“Drone”);
+
+	})
+	.map((filteredItem) => filteredItem.objectID);
+
+```
+---
+class: center, middle
+
+# Immutability
+---
+# basically we want usual
+```javascript
+var arr1 = [1,2,3];
+var arr2 = arr1.push(6);
+
+console.log(arr1); // [1, 2, 3, 6]
+console.log(arr2); // 4
+```
+to be
+
+```javascript
+var arr1 = [1,2,3];
+var arr2 = arr1.push(6);
+
+console.log(arr1); // [1, 2, 3]
+console.log(arr2); // [1, 2, 3, 6]
+```
+---
+class: center, middle
+# How do you mean save a new thing to memory every time?
+---
+class: center, middle
+
+#ImmutableJS - Shared structures
+
+.structureImage[![changed object](images/changing.png)]
+
+---
+class: center, middle
+# DOM handling
+### other aspect of JS programming
+---
+# Attaching responsibility - currying in DOM
+```javascript
+var createMethodClickAttacher = function(method) {
+	return function(domID) {
+		var element = document.getElementById(domId);
+		element.addEventListener("click", method);
+	}
+}
+```
+so
+```javascript
+var makeTriggerSearch = createMethodClickAttacher(doSearch);
+
+makeTriggerSearch('#search-button-1');
+makeTriggerSearch('#search-button-2');
+
+```
+
+or
+
+```javascript
+createMethodClickAttacher(doSearch)('#search-button-1');
+createMethodClickAttacher(doSearch)('#search-button-2');
+```
+---
+class: center, middle
+# Reacting to events
+---
+class: middle
+### c - color change (click on a button)
+### b - ball shooting out of the cannon
+
+### Timelines:
+```
+-b--b-bb-bbb-b-b---b--|
+
+c----c--c-----c---c---|
+```
+---
+
+class: center, middle
+
+# time dependent sequences of stuff
+---
+
+class: center, middle
+
+# streams
+---
+
+### colorChangeStream and ballStream
+
+```javascript
+	var ballShootingStream = clickStream.map((event) => {
+		return {
+			type: 'colorChange',
+			color: event.color
+		};
+	}).merge(ballStream.map((ball) => {
+		return {type: 'ball',
+				direction: ball.direction};
+	}));
+
+````
+
+```
+Merged and remapped stream (ballShootingStream):
+
+CB--BCBBCBBB-BCB--CB--|
+```
+
+```javascript
+
+	ballShootingStream.subscribe((event) => {
+		switch(event.type){
+			case 'colorChange':
+				changeColor(event.color);
+				break;
+			case 'ball'
+				shootBall(event.direction);
+				break;
+		}
+	});
+```
+---
+
+class: center, middle
+
+### Other interactions
+
+---
+
+class: center, middle
+
+### Questions?
+
+
+
+
+    </textarea>
+    <script src="../sources/remark.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
