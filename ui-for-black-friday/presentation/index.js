@@ -80,15 +80,20 @@ export default class Presentation extends React.Component {
           <Image src={images.pdp.replace('/', '')} margin="-25px auto" width="25% !important" />
         </Slide>
         <Slide transition={["fade"]} bgColor="primary">
-        <Text size={6} textColor="secondary">{'\u00A0\u00A0\u00A0\u00A0\u00A0'}///</Text>
-        <Heading size={6} textColor="secondary">As it gets more complex...</Heading>
-        <Text size={6} textColor="secondary">///</Text>
+          <Text size={6} textColor="secondary">{'\u00A0\u00A0\u00A0\u00A0\u00A0'}///</Text>
+          <Heading size={6} textColor="secondary">As it gets more complex...</Heading>
+          <Text size={6} textColor="secondary">///</Text>
         </Slide>
         <Slide transition={["fade"]} bgColor="primary" textColor="tertiary">
           <Image src={images.theline.replace('/', '')} margin="-25px auto"  />
         </Slide>
         <Slide transition={["fade"]} bgColor="primary" textColor="tertiary">
           <Image src={images.rendering.replace('/', '')} margin="-25px auto" />
+        </Slide>
+        <Slide transition={["fade"]} bgColor="primary" textColor="tertiary">
+          <Text size={6} textColor="ternary">{'\u00A0\u00A0\u00A0\u00A0\u00A0'}///</Text>
+          <Heading size={3} textColor="tertiary">Questions?</Heading>
+          <Text size={6} textColor="ternary">///</Text>
         </Slide>
         
       </Deck>
